@@ -12,18 +12,25 @@ import xorg.webservice.app.models.pojo.entity.User;
  * Created by raccoon on 06.09.16.
  */
 public class UserDaoService extends AbstractDaoService implements UserRepository {
-	
-	public UserDaoService ( AbstractDaoFactory dataBaseDaoDrivers ) {
-		
-		super ( dataBaseDaoDrivers );
-	}
-	
-	
-	@Override
-	public User getUserById ( String id ) throws Exception {
-		
-		try ( Connection connection = daoFactory.getDataSourceController ().open () ) {
-			return connection.createQuery ( "SQL", false ).addParameter ( "id", "smt" ).executeAndFetchFirst ( User.class );
-		}
-	}
+
+    public UserDaoService(AbstractDaoFactory dataBaseDaoDrivers) {
+
+        super(dataBaseDaoDrivers);
+    }
+
+
+    @Override
+    public User getUserById(String id) throws Exception {
+
+        try (Connection connection = daoFactory.getDataSourceController().open()) {
+            return connection.createQuery("SQL", false).addParameter("id", id).executeAndFetchFirst(User.class);
+        }
+    }
+
+    @Override
+    public User getUserByToken(String token) throws Exception {
+        try (Connection connection = daoFactory.getDataSourceController().open()) {
+            return connection.createQuery("SQL", false).addParameter("token", token).executeAndFetchFirst(User.class);
+        }
+    }
 }

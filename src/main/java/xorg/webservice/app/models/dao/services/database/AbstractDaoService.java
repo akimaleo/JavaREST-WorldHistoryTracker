@@ -11,7 +11,6 @@ public class AbstractDaoService {
 	protected AbstractDaoFactory daoFactory;
 	
 	public AbstractDaoService ( AbstractDaoFactory daoFactory ) {
-		
 		this.daoFactory = daoFactory;
 	}
 }
