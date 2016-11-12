@@ -1,0 +1,19 @@
+@profiles = develop
+
+[db.mysql<develop>]
+jdbcUrl = jdbc:mysql://${db.mysql.host}:${db.mysql.port}/${db.mysql.dbName}
+host = localhost
+port = 3306
+dbName = historyTracker
+userName = root
+password = geek
+poolSize = 5
+
+[db.mysql<release>]
+jdbcUrl = jdbc:mysql://${db.mysql.host}:${db.mysql.port}/${db.mysql.dbName}
+host = localhost
+port = 3306
+dbName = historyTracker
+userName = root
+password = geek
+poolSize = 50

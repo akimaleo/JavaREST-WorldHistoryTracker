@@ -1,0 +1,10 @@
+#Ignore
+.idea/*
+*.iml
+target/*
+
+#Unignore
+!externalStorage/*
+!pom.xml
+!.gitignore
+!src/*

@@ -1,0 +1,12 @@
+#Server configs
+[server]
+staticFiles = /public
+threadPoolSize = 8
+debugTool = true
+
+
+#URL-api mapping
+[api]
+auth = /auth
+registration = /
+#...
