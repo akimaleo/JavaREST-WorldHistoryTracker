@@ -12,4 +12,5 @@ public interface UserRepository {
 	
 	//Declare CRUD-operation
 	User getUserById ( String id ) throws Exception;
+	User getUserByToken ( String token ) throws Exception;
 }

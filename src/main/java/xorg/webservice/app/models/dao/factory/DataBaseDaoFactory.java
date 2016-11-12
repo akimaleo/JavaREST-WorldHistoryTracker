@@ -3,7 +3,7 @@ package xorg.webservice.app.models.dao.factory;
 
 import org.sql2o.Sql2o;
 import xorg.webservice.app.models.dao.factory.configs.DataSourceFactory;
-import xorg.webservice.app.models.dao.services.databse.daoimpl.UserDaoService;
+import xorg.webservice.app.models.dao.services.database.daoimpl.UserDaoService;
 
 
 /**

@@ -1,10 +1,10 @@
-package xorg.webservice.app.models.dao.services.databse.daoimpl;
+package xorg.webservice.app.models.dao.services.database.daoimpl;
 
 
 import org.sql2o.Connection;
 import xorg.webservice.app.models.dao.factory.AbstractDaoFactory;
 import xorg.webservice.app.models.dao.respository.UserRepository;
-import xorg.webservice.app.models.dao.services.databse.AbstractDaoService;
+import xorg.webservice.app.models.dao.services.database.AbstractDaoService;
 import xorg.webservice.app.models.pojo.entity.User;
 
 

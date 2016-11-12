@@ -1,4 +1,4 @@
-package xorg.webservice.app.models.dao.services.databse;
+package xorg.webservice.app.models.dao.services.database;
 
 
 import xorg.webservice.app.models.dao.factory.AbstractDaoFactory;

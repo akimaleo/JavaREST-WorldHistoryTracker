@@ -1,4 +1,4 @@
-package xorg.webservice.app.models.dao.services.databse.daoimpl;
+package xorg.webservice.app.models.dao.services.database.daoimpl;
 
 
 /**

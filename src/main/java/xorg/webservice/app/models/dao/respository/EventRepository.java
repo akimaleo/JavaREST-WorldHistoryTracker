@@ -1,11 +1,15 @@
 package xorg.webservice.app.models.dao.respository;
 
 
-/**
- * Created by raccoon on 10/5/16.
- *
- * @version: 1.0beta
- */
+import xorg.webservice.app.models.pojo.entity.Event;
+
+import java.awt.*;
+import java.util.List;
+
+
 public interface EventRepository {
+
+    List<Event> getUserEvents(String id);
+    List<Event> getEventsByLocation(Point position,float radius);
 
 }

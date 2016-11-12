@@ -1,7 +1,7 @@
 package xorg.webservice.app.models.dao.factory;
 
 
-import xorg.webservice.app.models.dao.services.databse.daoimpl.UserDaoService;
+import xorg.webservice.app.models.dao.services.database.daoimpl.UserDaoService;
 
 /**
  * Created by lonely on 15.08.16.
