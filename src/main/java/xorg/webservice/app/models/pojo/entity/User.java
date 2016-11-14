@@ -2,7 +2,7 @@ package xorg.webservice.app.models.pojo.entity;
 
 
 import lombok.AllArgsConstructor;
-import lombok.Value;
+import lombok.Data;
 import org.joda.time.DateTime;
 
 
@@ -11,7 +11,8 @@ import org.joda.time.DateTime;
  *
  * @version: 1.0beta
  */
-@Value
+
+@Data
 @AllArgsConstructor
 public class User {
 	
@@ -26,7 +27,5 @@ public class User {
 	private DateTime regDate;
 	
 	private String accessToken;
-	
-	
 	
 }

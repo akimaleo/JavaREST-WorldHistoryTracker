@@ -2,6 +2,8 @@ package xorg.webservice.app.utils.security.hashing;
 
 
 import org.mindrot.jbcrypt.BCrypt;
+import xorg.webservice.app.models.pojo.dto.AccessUser;
+import xorg.webservice.app.models.pojo.entity.User;
 
 import java.io.Serializable;
 
@@ -27,6 +29,33 @@ public class WebServiceSecurity {
 			
 			return salt;
 		}
+	}
+	
+	public User getAccessToken ( AccessUser accessUser, User user ) {
+		if ( BCrypt.checkpw ( accessUser.getPassword (), user.getHashPassword () ) ) {
+			user.setAccessToken ( BCrypt.hashpw ( user.getUserName ().concat ( String.valueOf ( user.getUserId () ) ), BCrypt.gensalt (8) ) );
+			return user;
+		} else {
+			user.setAccessToken ( "" );
+			return user;
+		}
+	}
+	
+	public User logOut ( User user ) {
+		user.setAccessToken ( "" );
+		return user;
+	}
+	
+	public User registration(AccessUser accessUser){
+		String salt = BCrypt.gensalt (8);
+		return new User (
+				null,
+				accessUser.getUserName (),
+				BCrypt.hashpw ( accessUser.getPassword (), salt ),
+				salt,
+				null,
+				
+		);
 	}
 	
 	

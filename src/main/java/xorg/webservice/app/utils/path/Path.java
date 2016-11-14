@@ -30,12 +30,4 @@ public class Path {
 
     }
 
-
-    public static final class WebAppTemplate {
-
-        public static final String INDEX = "";
-
-    }
-
-
 }

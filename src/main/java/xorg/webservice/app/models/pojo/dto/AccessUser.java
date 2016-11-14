@@ -9,10 +9,9 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class AccessUser{
+public class AccessUser {
+	private String userName;
+	private String password;
 	
-	public AccessUser ( String userName, String hashPassword, String encryptSalt ) {
-		
-		
-	}
+	
 }
