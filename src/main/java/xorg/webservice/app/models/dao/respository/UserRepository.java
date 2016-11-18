@@ -11,7 +11,7 @@ public interface UserRepository {
 	
 	User getUserByToken ( String token ) throws Exception;
 	
-	User getUser( AccessUser user);
+	User getUser( String userName);
 	
 	User createUser( User user );
 }
