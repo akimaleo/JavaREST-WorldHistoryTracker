@@ -4,6 +4,7 @@ package xorg.webservice.app.controllers.users;
 import lombok.Getter;
 import org.eclipse.jetty.http.HttpHeader;
 import org.slf4j.*;
+import org.sql2o.Sql2oException;
 import spark.Route;
 import xorg.webservice.app.models.dao.factory.AbstractDaoFactory;
 import xorg.webservice.app.models.dao.services.database.daoimpl.UserDaoService;
@@ -26,7 +27,12 @@ public class UserCtrl {
 		AccessUser accessUser = GsonConverter.fromJson ( request.body (), AccessUser.class );
 		User userToStorage = WebServiceSecurity.registration ( accessUser );
 		service.createUser ( userToStorage );
-		User user = service.getUser ( accessUser.getUserName () );
+		User user = null;
+		try {
+			user = service.getUser ( accessUser.getUserName () );
+		} catch (Sql2oException e) {
+			e.printStackTrace();
+		}
 		User verifiedUser = WebServiceSecurity.getAccessToken ( accessUser, user );
 		service.updateUser ( verifiedUser );
 		response.header ( HttpHeader.AUTHORIZATION.asString (), verifiedUser.getAccessToken () );

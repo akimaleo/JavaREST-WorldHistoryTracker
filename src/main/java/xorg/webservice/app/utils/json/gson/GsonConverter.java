@@ -43,9 +43,9 @@ public class GsonConverter implements ResponseTransformer {
 		return googleJson.toJson ( dtoObject, typeParam == null ? typeClass : typeParam );
 	}
 	
-	public static < T > T fromJson ( String jsonToken, Class< T > typeClass ) {
+	public static < T > T fromJson (String jsonToken, java.lang.Class typeClass ) {
 		
-		return googleJson.fromJson ( jsonToken, typeClass );
+		return (T) googleJson.fromJson ( jsonToken, typeClass );
 	}
 	
 	public static < T > T fromJson ( String jsonToken, Type type ) {

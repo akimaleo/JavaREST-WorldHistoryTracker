@@ -8,3 +8,5 @@ target/*
 !pom.xml
 !.gitignore
 !src/*
+Будет удалено .idea/
+Будет удалено target/

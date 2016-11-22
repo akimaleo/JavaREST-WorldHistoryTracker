@@ -27,6 +27,9 @@ public class Path {
         public final static String AUTH = ServerConfReader.get( "api.auth" );
 
         public final static String REGISTRATION = ServerConfReader.get( "api.registration" );
+        public final static String EVENT_ADD = ServerConfReader.get( "api.createEvent" );
+        public final static String EVENTS = ServerConfReader.get( "api.events" );
+        public final static String EVENTS_WITH_LOCATION = ServerConfReader.get("api.eventsByLocation");
 
     }
 

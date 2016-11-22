@@ -28,19 +28,22 @@ public class EventCtrl {
 		
 		User user = userDaoService.getUserByToken ( request.headers ( HttpHeader.AUTHORIZATION.asString () ) );
 		service.createEvent ( new Event ( event.getContent (), event.getLongitude (), event.getLatitude (), user.getUserId () ) );
-		return null;
+		return response;
 	};
-	
+
+	@Getter
 	private static Route getEventByLocation = ( request, response ) -> {
 		User user = userDaoService.getUserByToken ( request.headers ( HttpHeader.AUTHORIZATION.asString () ) );
 		EventSearchDto eventSearchDto = GsonConverter.fromJson ( request.body (), EventSearchDto.class );
 		List< Event > eventList =  service.getEventsByLocation ( new Point ( (int)eventSearchDto .getLatitude (), (int)eventSearchDto.getLongitude () ), eventSearchDto.getRadius () );
 		return GsonConverter.toJson ( eventList );
 	};
-	private static Route getEventByLocationAndDatatime = ( request, response ) -> {
+	@Getter
+	private static Route getEventByLocationAndDatetime = (request, response ) -> {
 		User user = userDaoService.getUserByToken ( request.headers ( HttpHeader.AUTHORIZATION.asString () ) );
 		EventSearchDto eventSearchDto = GsonConverter.fromJson ( request.body (), EventSearchDto.class );
 		List< Event > eventList =  service.getEventsByLocationAndTime ( new Point ( (int)eventSearchDto .getLatitude (), (int)eventSearchDto.getLongitude () ), eventSearchDto.getRadius (), eventSearchDto.getFrom (), eventSearchDto.getTo () );
 		return GsonConverter.toJson ( eventList );
 	};
+
 }
