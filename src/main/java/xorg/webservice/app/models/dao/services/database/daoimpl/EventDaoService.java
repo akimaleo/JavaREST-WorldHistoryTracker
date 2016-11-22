@@ -65,8 +65,12 @@ public class EventDaoService extends AbstractDaoService implements EventReposito
 			connection.createQuery ( sql, false )
 					.addParameter ( "name", event.getEventName () )
 					.addParameter ( "long", event.getLongitude () )
+					.addParameter("userid", event.getUserId())
 					.addParameter ( "lat", event.getLatitude ())
 					.executeUpdate ();
+		}
+		catch (Sql2oException e  ){
+			e.printStackTrace();
 		}
 		
 	}
