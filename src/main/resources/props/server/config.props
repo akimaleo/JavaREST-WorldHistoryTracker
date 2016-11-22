@@ -7,6 +7,8 @@ debugTool = true
 
 #URL-api mapping
 [api]
-auth = /auth
-registration = /
-#...
+auth = /user/auth/
+registration = /user/reg/
+createEvent = /events/create/
+events = /events/all
+eventsByLocation = /events/with_location/

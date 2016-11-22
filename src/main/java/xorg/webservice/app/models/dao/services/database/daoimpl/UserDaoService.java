@@ -6,7 +6,6 @@ import org.sql2o.Sql2oException;
 import xorg.webservice.app.models.dao.factory.AbstractDaoFactory;
 import xorg.webservice.app.models.dao.respository.UserRepository;
 import xorg.webservice.app.models.dao.services.database.AbstractDaoService;
-import xorg.webservice.app.models.pojo.dto.AccessUser;
 import xorg.webservice.app.models.pojo.entity.User;
 
 
@@ -60,4 +59,16 @@ public class UserDaoService extends AbstractDaoService implements UserRepository
             return getUser(user.getUserName());
         }
     }
+	
+	@Override
+	public User updateUser ( User user ) {
+		String sql = "UPDATE users SET accessToken = :token WHERE userId = :id";
+		try(Connection connection = daoFactory.getDataSourceController ().open ()){
+			connection.createQuery ( sql, false)
+					.addParameter ( "token", user.getAccessToken () )
+					.addParameter ( "id", user.getUserId () )
+					.executeUpdate ();
+		}
+		return getUser ( user.getUserName () );
+	}
 }

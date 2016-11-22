@@ -3,7 +3,8 @@ package xorg.webservice.app.models.pojo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.joda.time.DateTime;
+
+import java.sql.Timestamp;
 
 
 /**
@@ -24,8 +25,13 @@ public class User {
 	
 	private String encryptSalt;
 	
-	private DateTime regDate;
+	private Timestamp regDate;
 	
 	private String accessToken;
 	
+	public User ( String userName, String pass, String salt ) {
+		this.userName = userName;
+		this.hashPassword = pass;
+		this.encryptSalt = salt;
+	}
 }

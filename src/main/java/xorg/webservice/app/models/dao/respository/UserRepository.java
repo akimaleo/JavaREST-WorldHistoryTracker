@@ -1,7 +1,6 @@
 package xorg.webservice.app.models.dao.respository;
 
 
-import xorg.webservice.app.models.pojo.dto.AccessUser;
 import xorg.webservice.app.models.pojo.entity.User;
 
 public interface UserRepository {
@@ -14,4 +13,6 @@ public interface UserRepository {
 	User getUser( String userName);
 	
 	User createUser( User user );
+	
+	User updateUser ( User user );
 }

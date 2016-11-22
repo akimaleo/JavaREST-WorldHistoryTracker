@@ -3,7 +3,6 @@ package xorg.webservice.app.models.pojo.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.awt.*;
 import java.sql.Timestamp;
 
 /**
@@ -18,10 +17,18 @@ public class Event {
 	
 	private String eventName;
 	
-	private Point position;
+	private double latitude;
+	
+	private double longitude;
 	
 	private Timestamp createDate;
 	
 	private int userId;
 	
+	public Event ( String content, double longitude, double latitude, int userId ) {
+		this.eventName = content;
+		this.longitude = longitude;
+		this.latitude = latitude;
+		this.userId = userId;
+	}
 }

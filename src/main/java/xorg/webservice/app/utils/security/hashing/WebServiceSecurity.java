@@ -31,7 +31,7 @@ public class WebServiceSecurity {
 		}
 	}
 	
-	public User getAccessToken ( AccessUser accessUser, User user ) {
+	public static User getAccessToken ( AccessUser accessUser, User user ) {
 		if ( BCrypt.checkpw ( accessUser.getPassword (), user.getHashPassword () ) ) {
 			user.setAccessToken ( BCrypt.hashpw ( user.getUserName ().concat ( String.valueOf ( user.getUserId () ) ), BCrypt.gensalt (8) ) );
 			return user;
@@ -41,20 +41,17 @@ public class WebServiceSecurity {
 		}
 	}
 	
-	public User logOut ( User user ) {
+	public static User logOut ( User user ) {
 		user.setAccessToken ( "" );
 		return user;
 	}
 	
-	public User registration(AccessUser accessUser){
+	public static User registration(AccessUser accessUser){
 		String salt = BCrypt.gensalt (8);
 		return new User (
-				null,
 				accessUser.getUserName (),
 				BCrypt.hashpw ( accessUser.getPassword (), salt ),
-				salt,
-				null,
-				
+				salt
 		);
 	}
 	

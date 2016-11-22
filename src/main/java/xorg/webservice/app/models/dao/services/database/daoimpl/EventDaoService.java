@@ -7,7 +7,7 @@ import xorg.webservice.app.models.dao.respository.EventRepository;
 import xorg.webservice.app.models.dao.services.database.AbstractDaoService;
 import xorg.webservice.app.models.pojo.entity.Event;
 
-import java.awt.geom.Point2D;
+import java.awt.*;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -30,30 +30,45 @@ public class EventDaoService extends AbstractDaoService implements EventReposito
 	}
 	
 	@Override
-	public List< Event > getEventsByLocation ( Point2D position, float radius ) {
-		String sql = "SELECT * FROM userEvents WHERE longitude BETWEEN :topBorder AND :bottomBorder AND latitude BETWEEN :leftBorder AND :rightBorder";
+	public List< Event > getEventsByLocation ( Point position, float radius ) {
+		String sql = "SELECT * FROM userEvents WHERE ( SQRT(POW(:posX * latitude) + POW(:posY * longitude)) <= :radius )";
 		try ( Connection connection = daoFactory.getDataSourceController ().open () ) {
-			connection.createQuery ( sql, false )
-					.addParameter ( "topBorder", position.getY ()+radius )
-					.addParameter ( "bottomBorder", position.getY ()-radius )
-					.addParameter ( "leftBorder", position.getX ()-radius )
-					.addParameter ( "rightBorder", position.getX ()+radius )
+			return connection.createQuery ( sql, false )
+					.addParameter ( "posX", position.getX () )
+					.addParameter ( "posY", position.getY () )
+					.addParameter ( "radius", radius )
 					.executeAndFetch ( Event.class );
-					
+			
 		}
-		return null;
 	}
 	
 	
 	@Override
-	public List< Event > getEventsByLocationAndTime ( java.awt.geom.Point2D position, float radius, Timestamp from, Timestamp to ) {
+	public List< Event > getEventsByLocationAndTime ( Point position, float radius, Timestamp from, Timestamp to ) {
+		String sql = "SELECT * FROM userEvents WHERE ( SQRT(POW(:posX * latitude) + POW(:posY * longitude)) <= :radius ) AND createDate BETWEEN :from AND :to";
 		try ( Connection connection = daoFactory.getDataSourceController ().open () ) {
-			String sql = "SELECT * FROM EVENT" +
-					"WHERE `longitude` BETWEEN " + ( position.getY () - radius ) + " AND " + ( position.getY () + radius ) +
-					" AND `latitude` BETWEEN " + ( position.getX () - radius ) + " AND " + ( position.getX () + radius ) +
-					" AND `dateTime` BETWEEN " + from.toString () + " AND " + to.toString () + ";";
-			return connection.createQuery ( sql ).executeAndFetch ( Event.class );
+			return connection.createQuery ( sql, false )
+					.addParameter ( "posX", position.getX () )
+					.addParameter ( "posY", position.getY () )
+					.addParameter ( "radius", radius )
+					.addParameter ( "from", from )
+					.addParameter ( "to", to )
+					.executeAndFetch ( Event.class );
+			
 		}
+	}
+	
+	@Override
+	public void createEvent ( Event event ) {
+		String sql = "INSERT INTO userEvents(eventName, longitude, latitude, userId) VALUE(:name, :long, :lat, :userid)";
+		try(Connection connection = daoFactory.getDataSourceController ().open ()){
+			connection.createQuery ( sql, false )
+					.addParameter ( "name", event.getEventName () )
+					.addParameter ( "long", event.getLongitude () )
+					.addParameter ( "lat", event.getLatitude ())
+					.executeUpdate ();
+		}
+		
 	}
 	
 	;

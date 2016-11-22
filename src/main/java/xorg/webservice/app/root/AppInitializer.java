@@ -15,9 +15,6 @@ public class AppInitializer {
 		
 		logger.info ( marker, "WebService is started." );
 		StarterFacade.start ();
-		
-		
-		
 	}
 }
 
