@@ -6,7 +6,7 @@ host = localhost
 port = 3306
 dbName = historyTracker
 userName = root
-password = gear4live
+password = root
 poolSize = 5
 
 [db.mysql<release>]

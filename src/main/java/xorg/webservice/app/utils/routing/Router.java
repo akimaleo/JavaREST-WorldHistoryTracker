@@ -20,6 +20,7 @@ public class Router{
     
     public static void init( ) {
         before(BeforeFilters.addTrailingSlashes);
+        before(BeforeFilters.requestInfo);
         post ( Path.WebService.AUTH, UserCtrl.getAuth () );
         post ( Path.WebService.REGISTRATION, UserCtrl.getCreateUser () );
         post( Path.WebService.EVENT_ADD, EventCtrl.getCreateEvent());
