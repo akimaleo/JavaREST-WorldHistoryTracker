@@ -46,7 +46,8 @@ public class EventDaoService extends AbstractDaoService implements EventReposito
 
     @Override
     public List<Event> getEventsByLocationAndTime(Point2D.Double position, double radius, Timestamp from, Timestamp to) {
-        radius /= 111;
+        //TODO: uncomment
+//        radius /= 111;
         String sql = "SELECT * FROM userEvents WHERE ( SQRT(POW(:posX - latitude,2) + POW(:posY - longitude,2)) <= :radius ) AND createDate BETWEEN :from AND :to";
         try (Connection connection = daoFactory.getDataSourceController().open()) {
             return connection.createQuery(sql, false)
@@ -66,15 +67,14 @@ public class EventDaoService extends AbstractDaoService implements EventReposito
         try (Connection connection = daoFactory.getDataSourceController().open()) {
             connection.createQuery(sql, false)
                     .addParameter("name", event.getEventName())
+                    .addParameter("lat", event.getLatitude())
                     .addParameter("long", event.getLongitude())
                     .addParameter("userid", event.getUserId())
-                    .addParameter("lat", event.getLatitude())
                     .executeUpdate();
         } catch (Sql2oException e) {
             e.printStackTrace();
         }
+        System.out.println("\n\nCreate event user: " + event.toString());
 
     }
-
-    ;
 }

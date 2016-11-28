@@ -12,23 +12,23 @@ import java.sql.Timestamp;
 @Data
 @AllArgsConstructor
 public class Event {
-	
-	private int eventId;
-	
-	private String eventName;
-	
-	private double latitude;
-	
-	private double longitude;
-	
-	private Timestamp createDate;
-	
-	private int userId;
-	
-	public Event ( String content, double longitude, double latitude, int userId ) {
-		this.eventName = content;
-		this.longitude = longitude;
-		this.latitude = latitude;
-		this.userId = userId;
-	}
+
+    private int eventId;
+
+    private String eventName;
+
+    private double latitude;
+
+    private double longitude;
+    
+    private Timestamp createDate;
+
+    private int userId;
+
+    public Event(String content, double latitude, double longitude, int userId) {
+        this.eventName = content;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.userId = userId;
+    }
 }

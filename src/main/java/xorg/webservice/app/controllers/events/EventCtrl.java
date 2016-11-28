@@ -22,13 +22,30 @@ import java.util.List;
 public class EventCtrl {
     private static EventDaoService service = AbstractDaoFactory.getDataBaseDaoFactory().getEventDaoService();
     private static UserDaoService userDaoService = AbstractDaoFactory.getDataBaseDaoFactory().getUserDaoService();
-
+    /*CREATE TABLE `userEvents` (
+      `eventId` int(11) NOT NULL AUTO_INCREMENT,
+      `eventName` text NOT NULL,
+      `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      `latitude` double NOT NULL DEFAULT '0',
+      `longitude` double NOT NULL DEFAULT '0',
+      `userId` int(11) NOT NULL,
+      PRIMARY KEY (`eventId`),
+      KEY `userId` (`userId`),
+      CONSTRAINT `userEvents_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    */
     @Getter
     private static Route createEvent = (request, response) -> {
         InEvent event = GsonConverter.fromJson(request.body(), InEvent.class);
-
         User user = userDaoService.getUserByToken(request.headers(HttpHeader.AUTHORIZATION.asString()));
-        service.createEvent(new Event(event.getContent(), event.getLongitude(), event.getLatitude(), user.getUserId()));
+        System.out.println("REQUEST AUTHORIZATION HEADER:" + request.headers(HttpHeader.AUTHORIZATION.asString()));
+        if (user == null) {
+            System.out.println("404");
+            return "404 no user auth";
+        }
+        service.createEvent(new Event(event.getContent(), event.getLatitude(), event.getLongitude(), user.getUserId()));
+        System.out.println("May create");
+
         return response;
     };
 
@@ -41,7 +58,6 @@ public class EventCtrl {
     };
     @Getter
     private static Route getEventByLocationAndDatetime = (request, response) -> {
-        System.out.println("jhjhgj");
 //		User user = userDaoService.getUserByToken ( request.headers ( HttpHeader.AUTHORIZATION.asString () ) );
         EventSearchDto eventSearchDto = GsonConverter.fromJson(request.body(), EventSearchDto.class);
         List<Event> eventList = service.getEventsByLocationAndTime(
@@ -51,7 +67,7 @@ public class EventCtrl {
                 eventSearchDto.getRadius(),
                 eventSearchDto.getFrom(),
                 eventSearchDto.getTo());
-        System.out.print(eventList);
+        System.out.print("Return events: " + eventList);
         return GsonConverter.toJson(eventList);
     };
 

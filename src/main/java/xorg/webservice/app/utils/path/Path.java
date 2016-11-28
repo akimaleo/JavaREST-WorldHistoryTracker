@@ -5,9 +5,6 @@ import lombok.Getter;
 import xorg.webservice.app.utils.propsreader.ServerConfReader;
 
 
-/**
- * Created by raccoon on 05.09.16.
- */
 public class Path {
 
     @Getter

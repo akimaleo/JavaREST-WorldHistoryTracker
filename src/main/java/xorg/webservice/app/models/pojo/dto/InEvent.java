@@ -10,7 +10,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class InEvent {
 	private String content;
-	private double longitude;
 	private double latitude;
-	
+	private double longitude;
+
 }
