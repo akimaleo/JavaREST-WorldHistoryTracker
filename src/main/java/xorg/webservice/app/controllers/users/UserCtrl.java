@@ -62,20 +62,22 @@ public class UserCtrl {
 
     @Getter
     private static Route checkToken = (request, response) -> {
-        try {
+        String userToken = request.headers(HttpHeaders.Authorization.toString());
 
-            String userToken = request.headers(HttpHeaders.Authorization.toString());
-//            logger.info(userToken);
+
+        try {
             User verifiedUser = service.getUserByToken(userToken);
+            System.out.println("got it: " + userToken);
             response.header(HttpHeaders.Authorization.toString(), verifiedUser.getUserName());
-            return response;
+//            response.body(verifiedUser.getUserName());
+            return null;
 
         } catch (Exception e) {
             e.printStackTrace();
             response.header(
                     HttpHeader.AUTHORIZATION.asString(),
-                    "NULL");
-            return "404 not found";
+                    "404 not found");
+            return response;
 
         }
 

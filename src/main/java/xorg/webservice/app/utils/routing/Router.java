@@ -19,8 +19,13 @@ public class Router {
 //            System.out.print(request.ip());
             return response;
         });
+//        get("/user/check_token/", (request, response) -> {
+//            System.out.print(request.ip());
+//            return response;
+//        });
+
         post(Path.WebService.AUTH, UserCtrl.getAuth());
-        post(Path.WebService.CHECK_TOKEN, UserCtrl.getCheckToken());
+        get(Path.WebService.CHECK_TOKEN, UserCtrl.getCheckToken());
         post(Path.WebService.REGISTRATION, UserCtrl.getCreateUser());
         post(Path.WebService.EVENT_ADD, EventCtrl.getCreateEvent());
         post(Path.WebService.EVENTS_WITH_LOCATION, EventCtrl.getGetEventByLocationAndDatetime());

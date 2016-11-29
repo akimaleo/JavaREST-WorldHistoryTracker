@@ -9,7 +9,7 @@ debugTool = true
 [api]
 auth = /user/auth/
 registration = /user/reg/
-checkToken = /user/check_tocken
+checkToken = /user/check_token/
 createEvent = /events/create/
-events = /events/all
+events = /events/all/
 eventsByLocation = /events/with_location/
