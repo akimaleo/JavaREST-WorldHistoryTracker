@@ -20,20 +20,10 @@ import java.util.List;
  * Created by akimaleo on 12.11.16.
  */
 public class EventCtrl {
+
     private static EventDaoService service = AbstractDaoFactory.getDataBaseDaoFactory().getEventDaoService();
     private static UserDaoService userDaoService = AbstractDaoFactory.getDataBaseDaoFactory().getUserDaoService();
-    /*CREATE TABLE `userEvents` (
-      `eventId` int(11) NOT NULL AUTO_INCREMENT,
-      `eventName` text NOT NULL,
-      `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      `latitude` double NOT NULL DEFAULT '0',
-      `longitude` double NOT NULL DEFAULT '0',
-      `userId` int(11) NOT NULL,
-      PRIMARY KEY (`eventId`),
-      KEY `userId` (`userId`),
-      CONSTRAINT `userEvents_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-    */
+
     @Getter
     private static Route createEvent = (request, response) -> {
         InEvent event = GsonConverter.fromJson(request.body(), InEvent.class);

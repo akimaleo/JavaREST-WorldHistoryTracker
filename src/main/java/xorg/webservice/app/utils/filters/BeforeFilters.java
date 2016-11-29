@@ -18,8 +18,8 @@ public class BeforeFilters {
 	};
 
 	public static Filter requestInfo = ( Request request, Response response) -> {
-		System.out.println(request.ip());
-		System.out.println(request.headers(HttpHeaders.Authorization.getType()));
-		System.out.println(request.body());
+//		System.out.println(request.ip());
+//		System.out.println(request.headers(HttpHeaders.Authorization.getType()));
+//		System.out.println(request.body());
 	};
 }

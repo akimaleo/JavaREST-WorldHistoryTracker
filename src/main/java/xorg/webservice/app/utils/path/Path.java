@@ -22,6 +22,7 @@ public class Path {
         public final static String INDEX = "";
 
         public final static String AUTH = ServerConfReader.get( "api.auth" );
+        public final static String CHECK_TOKEN = ServerConfReader.get( "api.check_token" );
 
         public final static String REGISTRATION = ServerConfReader.get( "api.registration" );
         public final static String EVENT_ADD = ServerConfReader.get( "api.createEvent" );
