@@ -67,9 +67,8 @@ public class UserCtrl {
 
         try {
             User verifiedUser = service.getUserByToken(userToken);
-            System.out.println("got it: " + userToken);
+            System.out.println("AccessTokenCheck: " + userToken);
             response.header(HttpHeaders.Authorization.toString(), verifiedUser.getUserName());
-//            response.body(verifiedUser.getUserName());
             return null;
 
         } catch (Exception e) {

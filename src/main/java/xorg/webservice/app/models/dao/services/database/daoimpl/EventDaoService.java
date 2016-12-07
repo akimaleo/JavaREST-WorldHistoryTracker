@@ -29,7 +29,13 @@ public class EventDaoService extends AbstractDaoService implements EventReposito
             return connection.createQuery(sql, false).addParameter("id", id).executeAndFetch(Event.class);
         }
     }
-
+    @Override
+    public List<Event> getUserEventsByToken(String token) throws Sql2oException {
+        try (Connection connection = daoFactory.getDataSourceController().open()) {
+            String sql = "SELECT eventId, eventName,createDate,latitude,longitude FROM historyTracker.userEvents INNER JOIN users ON users.userId = userEvents.userId WHERE `accessToken` = :token;";
+            return connection.createQuery(sql, false).addParameter("token", token).executeAndFetch(Event.class);
+        }
+    }
     @Override
     public List<Event> getEventsByLocation(Point position, float radius) {
         String sql = "SELECT * FROM userEvents WHERE ( SQRT(POW(:posX * latitude) + POW(:posY * longitude)) <= :radius )";

@@ -12,4 +12,5 @@ registration = /user/reg/
 checkToken = /user/check_token/
 createEvent = /events/create/
 events = /events/all/
+eventsByToken = /user/events_by_token/
 eventsByLocation = /events/with_location/

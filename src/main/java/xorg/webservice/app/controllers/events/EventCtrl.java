@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.eclipse.jetty.http.HttpHeader;
 import spark.Route;
 import xorg.webservice.app.models.dao.factory.AbstractDaoFactory;
+import xorg.webservice.app.models.dao.factory.DataBaseDaoDrivers;
 import xorg.webservice.app.models.dao.services.database.daoimpl.EventDaoService;
 import xorg.webservice.app.models.dao.services.database.daoimpl.UserDaoService;
 import xorg.webservice.app.models.pojo.dto.EventSearchDto;
@@ -60,5 +61,25 @@ public class EventCtrl {
         System.out.print("Return events: " + eventList);
         return GsonConverter.toJson(eventList);
     };
-
+    @Getter
+    private static Route removeEvent = (request, response) -> {
+//		User user = userDaoService.getUserByToken ( request.headers ( HttpHeader.AUTHORIZATION.asString () ) );
+        EventSearchDto eventSearchDto = GsonConverter.fromJson(request.body(), EventSearchDto.class);
+        List<Event> eventList = service.getEventsByLocationAndTime(
+                new Point2D.Double(
+                        eventSearchDto.getLatitude(),
+                        eventSearchDto.getLongitude()),
+                eventSearchDto.getRadius(),
+                eventSearchDto.getFrom(),
+                eventSearchDto.getTo());
+        System.out.print("Return events: " + eventList);
+        return GsonConverter.toJson(eventList);
+    };
+    @Getter
+    private static Route getEventByUserToken = (request, response) -> {
+        User user = userDaoService.getUserByToken(request.headers(HttpHeader.AUTHORIZATION.asString()));
+        List<Event> eventList = service.getUserEventsByToken(String.valueOf(user.getAccessToken()));
+        System.out.print("Return events: " + eventList);
+        return GsonConverter.toJson(eventList);
+    };
 }
